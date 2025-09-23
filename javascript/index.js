@@ -21,7 +21,6 @@ function play({ gain, frequency, type, lengthMs = 2000 }) {
   }, lengthMs);
 }
 
-// Function to sync a range slider and a number input
 function setupSliderSync(sliderId, numberId) {
   const slider = document.getElementById(sliderId);
   const number = document.getElementById(numberId);
@@ -37,14 +36,12 @@ function setupSliderSync(sliderId, numberId) {
     const min = parseFloat(number.min);
     const max = parseFloat(number.max);
 
-    // Validate input before setting the slider value
     if (!isNaN(value) && value >= min && value <= max) {
       slider.value = value;
     }
   });
 }
 
-// Set up synchronization for all sliders and number inputs
 setupSliderSync("frequencySlider-1", "frequencyNumber-1");
 setupSliderSync("gainSlider-1", "gainNumber-1");
 setupSliderSync("frequencySlider-2", "frequencyNumber-2");
@@ -81,7 +78,6 @@ document.getElementById("both").addEventListener("click", () => {
   );
   const type2 = document.getElementById("waveType-2").value;
 
-  // Play both sounds simultaneously with their user-defined gain values.
   play({ gain: gain1, frequency: frequency1, type: type1 });
   play({ gain: gain2, frequency: frequency2, type: type2 });
 });
