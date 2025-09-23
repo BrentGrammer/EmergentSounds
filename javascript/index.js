@@ -45,7 +45,7 @@ function createOscillator({ frequency = 440, type = "sine" } = {}) {
 function play({ gain = 1, frequency = 440, type = "sine" } = {}) {
   const osc = createOscillator({ frequency, type });
   const gainNode = audioCtx.createGain();
-  gainNode.gain.setValueAtTime(1, audioCtx.currentTime);
+  gainNode.gain.setValueAtTime(gain, audioCtx.currentTime);
   osc.connect(gainNode).connect(audioCtx.destination);
 
   osc.start();
