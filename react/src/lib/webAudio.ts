@@ -43,3 +43,9 @@ export interface ISoundParameters {
   type: OscillatorType;
   frequency: number;
 }
+
+export const defaultParameters: ISoundParameters = {
+  frequency: 440,
+  gain: 1,
+  type: "sine",
+};

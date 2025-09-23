@@ -1,34 +1,33 @@
 import { useState } from "react";
-import { play, type ISoundParameters } from "./lib/webAudio";
+import { defaultParameters, play, type ISoundParameters } from "./lib/webAudio";
 import SoundParameters from "./components/Sound/SoundParameters";
 import "./App.css";
 
 const AudioContext = window.AudioContext;
 const audioCtx = new AudioContext();
 
-const defaultParameters: ISoundParameters = {
-  frequency: 440,
-  gain: 1,
-  type: "sine",
-};
+interface ISound {
+  title: string;
+  parameters: ISoundParameters;
+}
 
-const DEFAULT_SOUNDS: { [id: string]: ISoundParameters } = {
-  sound1: defaultParameters,
-  sound2: defaultParameters,
+const DEFAULT_SOUNDS: { [id: string]: ISound } = {
+  sound1: { title: "Sound 1", parameters: defaultParameters },
+  sound2: { title: "Sound 1", parameters: defaultParameters },
 };
 
 function App() {
-  const [sounds, setSounds] = useState<{
-    [id: string]: ISoundParameters;
-  }>(DEFAULT_SOUNDS);
+  const [sounds, setSounds] = useState<{ [id: string]: ISound }>(
+    DEFAULT_SOUNDS
+  );
 
   const onPlaySound = (id: string) => {
-    const { gain, type, frequency } = sounds[id];
+    const { gain, type, frequency } = sounds[id].parameters;
     play({ audioCtx, gain, type, frequency });
   };
 
-  const updateSounds = (id: string, params: ISoundParameters) => {
-    setSounds({ ...sounds, [id]: params });
+  const updateSounds = (id: string, parameters: ISoundParameters) => {
+    setSounds({ ...sounds, [id]: { ...sounds[id], parameters } });
   };
 
   const playAll = () => {
