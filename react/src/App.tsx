@@ -1,46 +1,29 @@
-import "./App.css";
+import { useState } from "react";
 import ParameterSlider from "./components/ParameterSlider/ParameterSlider";
 import ParameterWaveType from "./components/ParameterWaveType/ParameterWaveType";
+import { play, type ISoundSetting } from "./lib/webAudio";
+import "./App.css";
 
 const AudioContext = window.AudioContext;
 const audioCtx = new AudioContext();
 
 function App() {
+  const [soundSettings, setSoundSettings] = useState<{
+    [id: string]: ISoundSetting;
+  }>({});
 
-  const createOscillator = ({
-    frequency,
-    type,
-  }: {
-    frequency: number;
-    type: OscillatorType;
-  }) => {
-    const osc = audioCtx.createOscillator();
-    osc.type = type;
-    osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-    return osc;
+  const onPlaySound = (id: string) => {
+    const { gain, type, frequency } = soundSettings[id];
+    play({ audioCtx, gain, type, frequency });
   };
 
-  const play = ({
-    gain,
-    frequency,
-    type,
-    lengthMs = 2000,
-  }: {
-    gain: number;
-    frequency: number;
-    type: OscillatorType;
-    lengthMs: number;
-  }) => {
-    const osc = createOscillator({ frequency, type });
-    const gainNode = audioCtx.createGain();
-    gainNode.gain.setValueAtTime(gain, audioCtx.currentTime);
-
-    osc.connect(gainNode).connect(audioCtx.destination);
-    osc.start();
-
-    setTimeout(() => {
-      osc.stop();
-    }, lengthMs);
+  const onSoundParameterChange = (
+    id: string,
+    newSetting: Partial<ISoundSetting>
+  ) => {
+    console.log({ id, newSetting });
+    const update = { ...soundSettings[id], ...newSetting };
+    setSoundSettings({ ...soundSettings, [id]: update });
   };
 
   return (
@@ -65,6 +48,11 @@ function App() {
           title="Frequency(Hz):"
           range={[50, 1000]}
           defaultValue={440}
+          onSoundParameterChange={(newSetting: unknown) =>
+            onSoundParameterChange("sound1", {
+              frequency: newSetting as number,
+            })
+          }
         />
         <ParameterSlider
           id="gainSlider-1"
@@ -72,15 +60,25 @@ function App() {
           range={[-2, 2]}
           defaultValue={1}
           step="0.1"
+          onSoundParameterChange={(newSetting: unknown) =>
+            onSoundParameterChange("sound1", { gain: newSetting as number })
+          }
         />
-        <ParameterWaveType id="waveType-1" />
+        <ParameterWaveType
+          id="waveType-1"
+          onSoundParameterChange={(newSetting: unknown) =>
+            onSoundParameterChange("sound1", {
+              type: newSetting as OscillatorType,
+            })
+          }
+        />
       </div>
 
       <div className="button-container">
-        <button id="osc1">Play Sound 1</button>
+        <button onClick={() => onPlaySound("sound1")}>Play Sound 1</button>
       </div>
 
-      <h2>Sound 2</h2>
+      {/* <h2>Sound 2</h2>
       <div className="controls-container">
         <ParameterSlider
           id="frequencySlider-2"
@@ -96,11 +94,13 @@ function App() {
           step="0.1"
         />
         <ParameterWaveType id="waveType-2" />
-      </div>
+      </div> */}
 
-      <div className="button-container">
-        <button id="osc2" onClick={() => play()}>Play Sound 2</button>
-      </div>
+      {/* <div className="button-container">
+        <button id="osc2" onClick={() => onPlaySound("osc2")}>
+          Play Sound 2
+        </button>
+      </div> */}
 
       <div className="button-container">
         <button id="both">Play Both Together</button>

@@ -5,6 +5,7 @@ interface Props {
   range: number[]; //[min,max]
   defaultValue: number;
   title: string;
+  onSoundParameterChange: (newSetting: unknown) => void;
   step?: string;
 }
 
@@ -13,6 +14,7 @@ export default function ParameterSlider({
   range,
   defaultValue,
   title,
+  onSoundParameterChange,
   step = "1",
 }: Props) {
   const [selectedValue, setSelectedValue] = useState<number>(defaultValue);
@@ -24,6 +26,7 @@ export default function ParameterSlider({
 
     if (!isNaN(val) && val >= min && val <= max) {
       setSelectedValue(val);
+      onSoundParameterChange(val);
     }
   };
 
