@@ -31,7 +31,10 @@ function App() {
   };
 
   const playAll = () => {
-    console.log("all");
+    Object.values(sounds).forEach((sound) => {
+      const { gain, type, frequency } = sound.parameters;
+      play({ audioCtx, gain, frequency, type });
+    });
   };
 
   return (
@@ -56,6 +59,7 @@ function App() {
           <div key={`playsound-${soundId}`}>
             <h2>{sound.title}</h2>
             <SoundParameters id={soundId} updateSounds={updateSounds} />
+
             <div className="button-container">
               <button onClick={() => onPlaySound(soundId)}>
                 {sound.title}
