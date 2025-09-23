@@ -2,6 +2,10 @@
 
 Built with vite and React.
 
+### Prerequisites
+
+- Node.js (with npm)
+
 ## Running
 
 - `cd react` (make sure you are in the react folder)
