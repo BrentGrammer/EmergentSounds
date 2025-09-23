@@ -13,7 +13,7 @@ interface ISound {
 
 const DEFAULT_SOUNDS: { [id: string]: ISound } = {
   sound1: { title: "Sound 1", parameters: defaultParameters },
-  sound2: { title: "Sound 1", parameters: defaultParameters },
+  sound2: { title: "Sound 2", parameters: defaultParameters },
 };
 
 function App() {
@@ -49,17 +49,21 @@ function App() {
         </li>
       </ul>
 
-      <h2>Sound 1</h2>
-      <SoundParameters id="sound1" updateSounds={updateSounds} />
-      <div className="button-container">
-        <button onClick={() => onPlaySound("sound1")}>Play Sound 1</button>
-      </div>
+      {Object.keys(sounds).map((soundId) => {
+        const sound = sounds[soundId];
 
-      <h2>Sound 2</h2>
-      <SoundParameters id="sound2" updateSounds={updateSounds} />
-      <div className="button-container">
-        <button onClick={() => onPlaySound("sound2")}>Play Sound 2</button>
-      </div>
+        return (
+          <div key={`playsound-${soundId}`}>
+            <h2>{sound.title}</h2>
+            <SoundParameters id={soundId} updateSounds={updateSounds} />
+            <div className="button-container">
+              <button onClick={() => onPlaySound(soundId)}>
+                {sound.title}
+              </button>
+            </div>
+          </div>
+        );
+      })}
 
       <div className="button-container">
         <button onClick={playAll}>Play All Together</button>

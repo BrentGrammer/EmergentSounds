@@ -39,7 +39,7 @@ export default function SoundParameters({ id, updateSounds }: Props) {
       />
       <ParameterSlider
         id={`gainSlider-${id}`}
-        title="Gain:"
+        title="Gain (Phase):"
         range={[-2, 2]}
         defaultValue={defaultSoundSetting.gain}
         step="0.1"
