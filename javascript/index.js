@@ -28,6 +28,9 @@ document.getElementById("osc2").addEventListener("click", () => {
 });
 
 document.getElementById("both").addEventListener("click", () => {
+  alert(
+    "There should be silence as the waves cancel each other out. Click OK to continue..."
+  );
   play({ gain: 1, frequency: 440, type: "sine" });
   // Set gain to -1 so wave crests align with wave troughs above
   play({ gain: -1, frequency: 440, type: "sine" });
