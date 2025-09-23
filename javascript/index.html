@@ -6,13 +6,59 @@
     <title>Destructive Interference</title>
     <link rel="stylesheet" href="./main.css" />
   </head>
-
   <body>
     <h1>Destructive Interference</h1>
-    <p>Click the buttons for sound results.</p>
-    <button id="osc1">Play Oscillator 1</button>
-    <button id="osc2">Play Oscillator 2</button>
-    <button id="both">Both - Destructive Interference</button>
+    <p>
+      Experiment by adjusting the parameters below.
+      Play each sound individually, then click "Play Both" to hear them cancel
+      each other out.
+    </p>
+
+    <div class="controls-container">
+      <div class="control-group">
+        <label for="frequencySlider"
+          >Frequency (Hz):
+          <span id="frequencyValue" class="value-display">440</span></label
+        >
+        <input
+          type="range"
+          id="frequencySlider"
+          min="50"
+          max="1000"
+          value="440"
+        />
+      </div>
+
+      <div class="control-group">
+        <label for="gainSlider"
+          >Gain: <span id="gainValue" class="value-display">1</span></label
+        >
+        <input
+          type="range"
+          id="gainSlider"
+          min="-1"
+          max="1"
+          step="0.1"
+          value="1"
+        />
+      </div>
+
+      <div class="control-group">
+        <label for="waveType">Wave Type:</label>
+        <select id="waveType">
+          <option value="sine">Sine</option>
+          <option value="square">Square</option>
+          <option value="sawtooth">Sawtooth</option>
+          <option value="triangle">Triangle</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button id="osc1">Play Sound 1 (+Gain)</button>
+      <button id="osc2">Play Sound 2 (-Gain)</button>
+      <button id="both">Play Both (Interference)</button>
+    </div>
 
     <script src="./index.js"></script>
   </body>
