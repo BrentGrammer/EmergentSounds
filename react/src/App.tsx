@@ -38,7 +38,7 @@ function App() {
   };
 
   return (
-    <main>
+    <main className="main-container">
       <h1>Sound Emergence</h1>
       <p>
         Experiment by adjusting the parameters for each sound individually, then
@@ -62,14 +62,14 @@ function App() {
 
             <div className="button-container">
               <button onClick={() => onPlaySound(soundId)}>
-                {sound.title}
+                Play {sound.title}
               </button>
             </div>
           </div>
         );
       })}
 
-      <div className="button-container">
+      <div className="button-container flex-center">
         <button onClick={playAll}>Play All Together</button>
       </div>
     </main>

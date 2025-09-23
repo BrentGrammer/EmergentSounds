@@ -22,3 +22,13 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
