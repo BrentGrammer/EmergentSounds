@@ -21,54 +21,67 @@ function play({ gain, frequency, type, lengthMs = 2000 }) {
   }, lengthMs);
 }
 
-// Add listeners for Sound 1's UI
-document.getElementById("frequencySlider-1").addEventListener("input", (e) => {
-  document.getElementById("frequencyValue-1").textContent = e.target.value;
-});
-document.getElementById("gainSlider-1").addEventListener("input", (e) => {
-  document.getElementById("gainValue-1").textContent = e.target.value;
-});
+// Function to sync a range slider and a number input
+function setupSliderSync(sliderId, numberId) {
+  const slider = document.getElementById(sliderId);
+  const number = document.getElementById(numberId);
 
-// Add listeners for Sound 2's UI
-document.getElementById("frequencySlider-2").addEventListener("input", (e) => {
-  document.getElementById("frequencyValue-2").textContent = e.target.value;
-});
-document.getElementById("gainSlider-2").addEventListener("input", (e) => {
-  document.getElementById("gainValue-2").textContent = e.target.value;
-});
+  // Sync number input to slider
+  slider.addEventListener("input", () => {
+    number.value = slider.value;
+  });
+
+  // Sync slider to number input
+  number.addEventListener("input", () => {
+    const value = parseFloat(number.value);
+    const min = parseFloat(number.min);
+    const max = parseFloat(number.max);
+
+    // Validate input before setting the slider value
+    if (!isNaN(value) && value >= min && value <= max) {
+      slider.value = value;
+    }
+  });
+}
+
+// Set up synchronization for all sliders and number inputs
+setupSliderSync("frequencySlider-1", "frequencyNumber-1");
+setupSliderSync("gainSlider-1", "gainNumber-1");
+setupSliderSync("frequencySlider-2", "frequencyNumber-2");
+setupSliderSync("gainSlider-2", "gainNumber-2");
 
 document.getElementById("osc1").addEventListener("click", () => {
-  const gain = parseFloat(document.getElementById("gainSlider-1").value);
+  const gain = parseFloat(document.getElementById("gainNumber-1").value);
   const frequency = parseFloat(
-    document.getElementById("frequencySlider-1").value
+    document.getElementById("frequencyNumber-1").value
   );
   const type = document.getElementById("waveType-1").value;
   play({ gain, frequency, type });
 });
 
 document.getElementById("osc2").addEventListener("click", () => {
-  const gain = parseFloat(document.getElementById("gainSlider-2").value);
+  const gain = parseFloat(document.getElementById("gainNumber-2").value);
   const frequency = parseFloat(
-    document.getElementById("frequencySlider-2").value
+    document.getElementById("frequencyNumber-2").value
   );
   const type = document.getElementById("waveType-2").value;
   play({ gain, frequency, type });
 });
 
 document.getElementById("both").addEventListener("click", () => {
-  const gain1 = parseFloat(document.getElementById("gainSlider-1").value);
+  const gain1 = parseFloat(document.getElementById("gainNumber-1").value);
   const frequency1 = parseFloat(
-    document.getElementById("frequencySlider-1").value
+    document.getElementById("frequencyNumber-1").value
   );
   const type1 = document.getElementById("waveType-1").value;
 
-  const gain2 = parseFloat(document.getElementById("gainSlider-2").value);
+  const gain2 = parseFloat(document.getElementById("gainNumber-2").value);
   const frequency2 = parseFloat(
-    document.getElementById("frequencySlider-2").value
+    document.getElementById("frequencyNumber-2").value
   );
   const type2 = document.getElementById("waveType-2").value;
 
-  // Play both sounds simultaneously without phase inversion.
+  // Play both sounds simultaneously with their user-defined gain values.
   play({ gain: gain1, frequency: frequency1, type: type1 });
   play({ gain: gain2, frequency: frequency2, type: type2 });
 });
