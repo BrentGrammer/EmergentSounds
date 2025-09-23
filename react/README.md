@@ -1,12 +1,12 @@
 # Using the Web Audio API
 
-Using the the builtin Web Audio API.
+Built with vite and React.
 
 ## Running
 
-- `cd javascript` (make sure you are in the javascript folder)
+- `cd react` (make sure you are in the react folder)
 - `npm install`
-- `npm start`
+- `npm run dev`
 
 ## Experiment Suggestions
 
