@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { defaultParameters, play, type ISoundParameters } from "./lib/webAudio";
-import SoundParameters from "./components/Sound/SoundParameters";
+import SoundParameters from "./components/SoundParameters/SoundParameters";
 import "./App.css";
 
 const AudioContext = window.AudioContext;
