@@ -3,49 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Destructive Interference</title>
+    <title>Sound Emergence</title>
     <link rel="stylesheet" href="./main.css" />
   </head>
   <body>
-    <h1>Destructive Interference</h1>
+    <h1>Sound Emergence</h1>
     <p>
-      Experiment by adjusting the parameters below.
-      Play each sound individually, then click "Play Both" to hear them cancel
-      each other out.
+      Experiment by adjusting the parameters for each sound individually, then
+      click "Play Both" to hear them cancel each other out.
     </p>
+    <ul>
+      <li>
+        Destructive Interference: Set the gain of sound 1 to "1" and the gain of
+        sound 2 to "-1" so they cancel each other out (you will hear silence
+        when playing both together)
+      </li>
+    </ul>
 
+    <h2>Sound 1</h2>
     <div class="controls-container">
       <div class="control-group">
-        <label for="frequencySlider"
+        <label for="frequencySlider-1"
           >Frequency (Hz):
-          <span id="frequencyValue" class="value-display">440</span></label
+          <span id="frequencyValue-1" class="value-display">440</span></label
         >
         <input
           type="range"
-          id="frequencySlider"
+          id="frequencySlider-1"
           min="50"
           max="1000"
           value="440"
         />
       </div>
-
       <div class="control-group">
-        <label for="gainSlider"
-          >Gain: <span id="gainValue" class="value-display">1</span></label
+        <label for="gainSlider-1"
+          >Gain: <span id="gainValue-1" class="value-display">1</span></label
         >
         <input
           type="range"
-          id="gainSlider"
+          id="gainSlider-1"
           min="-1"
           max="1"
           step="0.1"
           value="1"
         />
       </div>
-
       <div class="control-group">
-        <label for="waveType">Wave Type:</label>
-        <select id="waveType">
+        <label for="waveType-1">Wave Type:</label>
+        <select id="waveType-1">
           <option value="sine">Sine</option>
           <option value="square">Square</option>
           <option value="sawtooth">Sawtooth</option>
@@ -53,10 +58,53 @@
         </select>
       </div>
     </div>
+    <div class="button-container">
+      <button id="osc1">Play Sound 1</button>
+    </div>
+
+    <h2>Sound 2</h2>
+    <div class="controls-container">
+      <div class="control-group">
+        <label for="frequencySlider-2"
+          >Frequency (Hz):
+          <span id="frequencyValue-2" class="value-display">440</span></label
+        >
+        <input
+          type="range"
+          id="frequencySlider-2"
+          min="50"
+          max="1000"
+          value="440"
+        />
+      </div>
+      <div class="control-group">
+        <label for="gainSlider-2"
+          >Gain: <span id="gainValue-2" class="value-display">1</span></label
+        >
+        <input
+          type="range"
+          id="gainSlider-2"
+          min="-1"
+          max="1"
+          step="0.1"
+          value="1"
+        />
+      </div>
+      <div class="control-group">
+        <label for="waveType-2">Wave Type:</label>
+        <select id="waveType-2">
+          <option value="sine">Sine</option>
+          <option value="square">Square</option>
+          <option value="sawtooth">Sawtooth</option>
+          <option value="triangle">Triangle</option>
+        </select>
+      </div>
+    </div>
+    <div class="button-container">
+      <button id="osc2">Play Sound 2</button>
+    </div>
 
     <div class="button-container">
-      <button id="osc1">Play Sound 1 (+Gain)</button>
-      <button id="osc2">Play Sound 2 (-Gain)</button>
       <button id="both">Play Both (Interference)</button>
     </div>
 
