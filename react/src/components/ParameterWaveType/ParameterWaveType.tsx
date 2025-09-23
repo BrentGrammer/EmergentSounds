@@ -2,7 +2,7 @@ import { useState } from "react";
 
 interface Props {
   id: string;
-  onSoundParameterChange: (newSetting: unknown) => void;
+  onSoundParameterChange: (newSetting: OscillatorType) => void;
 }
 
 export default function ParameterWaveType({
@@ -13,7 +13,6 @@ export default function ParameterWaveType({
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const val = e.target.value as OscillatorType;
-    console.log({val})
     setSelected(val);
     onSoundParameterChange(val);
   };

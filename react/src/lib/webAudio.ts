@@ -38,7 +38,7 @@ export const play = ({
   }, lengthMs);
 };
 
-export interface ISoundSetting {
+export interface ISoundParameters {
   gain: number;
   type: OscillatorType;
   frequency: number;
