@@ -1,0 +1,19 @@
+{
+  "name": "destructive-interference-app",
+  "version": "1.0.0",
+  "description": "A simple web app to demonstrate destructive interference in audio.",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server ."
+  },
+  "keywords": [
+    "audio",
+    "web-audio",
+    "interference"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}
