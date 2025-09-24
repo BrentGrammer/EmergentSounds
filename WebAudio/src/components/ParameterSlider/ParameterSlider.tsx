@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface Props {
   id: string;
-  range: number[]; //[min,max]
+  range: number[];
   defaultValue: number;
   title: string;
-  onSoundParameterChange: (newSetting: unknown) => void;
+  onSoundParameterChange: (newSetting: number) => void;
   step?: string;
 }
 
@@ -18,15 +18,48 @@ export default function ParameterSlider({
   step = "1",
 }: Props) {
   const [selectedValue, setSelectedValue] = useState<number>(defaultValue);
+  const [inputValue, setInputValue] = useState<string>(String(defaultValue));
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const min = range[0];
-    const max = range[1];
-    const val = parseFloat(e.target.value);
+  const min = range[0];
+  const max = range[1];
 
+  useEffect(() => {
+    setInputValue(String(selectedValue));
+  }, [selectedValue]);
+
+  const handleValueChange = (val: number) => {
     if (!isNaN(val) && val >= min && val <= max) {
       setSelectedValue(val);
       onSoundParameterChange(val);
+    }
+  };
+
+  const onRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = parseFloat(e.target.value);
+    handleValueChange(val);
+  };
+
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const onInputBlur = () => {
+    const val = parseFloat(inputValue);
+
+    if (isNaN(val)) {
+      setInputValue(String(selectedValue));
+      return;
+    }
+
+    const clampedVal = Math.max(min, Math.min(max, val));
+
+    handleValueChange(clampedVal);
+    setInputValue(String(clampedVal));
+  };
+
+  const onInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      onInputBlur();
     }
   };
 
@@ -36,20 +69,22 @@ export default function ParameterSlider({
       <input
         type="range"
         id={id}
-        min={range[0]}
-        max={range[1]}
+        min={min}
+        max={max}
         step={step}
         value={selectedValue}
-        onChange={onChange}
+        onChange={onRangeChange}
       />
       <input
         type="number"
         id={`${id}Number`}
-        min={range[0]}
-        max={range[1]}
+        min={min}
+        max={max}
         step={step}
-        value={selectedValue}
-        onChange={onChange}
+        value={inputValue}
+        onChange={onInputChange}
+        onBlur={onInputBlur}
+        onKeyDown={onInputKeyDown}
       />
     </div>
   );

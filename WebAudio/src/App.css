@@ -50,3 +50,6 @@ button:hover {
   padding: 0;
   margin-left: 1rem;
 }
+.icon-delete-button:hover {
+  background-color: #dcdcdc;
+}
