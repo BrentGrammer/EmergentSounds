@@ -49,3 +49,8 @@ export const defaultParameters: ISoundParameters = {
   gain: 1,
   type: "sine",
 };
+
+export interface ISound {
+  title: string;
+  parameters: ISoundParameters;
+}

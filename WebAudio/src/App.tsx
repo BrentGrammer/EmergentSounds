@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { defaultParameters, play, type ISoundParameters } from "./lib/webAudio";
-import SoundParameters from "./components/SoundParameters/SoundParameters";
+import {
+  defaultParameters,
+  play,
+  type ISound,
+  type ISoundParameters,
+} from "./lib/webAudio";
 import "./App.css";
+import Sound from "./components/Sound/Sound";
 
 const AudioContext = window.AudioContext;
 const audioCtx = new AudioContext();
-
-interface ISound {
-  title: string;
-  parameters: ISoundParameters;
-}
 
 const defaultHighestSoundNumber = 2;
 
@@ -52,6 +52,15 @@ function App() {
     setSounds({ ...sounds, ...{ [`sound${soundNum}`]: newSound } });
   };
 
+  const removeSound = (id: string, soundNumber: number) => {
+    const updatedSounds = { ...sounds };
+    delete updatedSounds[id];
+    setSounds(updatedSounds);
+    if (soundNumber === highestSoundNumber) {
+      setHighestSoundNumber(highestSoundNumber - 1);
+    }
+  };
+
   return (
     <main className="main-container">
       <h1>Sound Emergence</h1>
@@ -74,14 +83,13 @@ function App() {
 
         return (
           <div key={`playsound-${soundId}`}>
-            <h2>{sound.title}</h2>
-            <SoundParameters id={soundId} updateSounds={updateSounds} />
-
-            <div className="button-container">
-              <button onClick={() => onPlaySound(soundId)}>
-                Play {sound.title}
-              </button>
-            </div>
+            <Sound
+              sound={sound}
+              soundId={soundId}
+              removeSound={removeSound}
+              updateSounds={updateSounds}
+              onPlaySound={onPlaySound}
+            />
           </div>
         );
       })}

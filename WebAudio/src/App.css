@@ -31,8 +31,21 @@ button:hover {
   justify-content: center;
 }
 
+.sound-title-container {
+  display: "flex";
+  align-items: "end";
+}
+
 .experiments-container {
   border: solid gray 2px;
-  padding: .5rem 1rem;
-  border-radius: .5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.icon-delete-button {
+  background: "none";
+  border: "none";
+  cursor: "pointer";
+  color: "#888";
+  padding: 0;
 }
