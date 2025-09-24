@@ -11,6 +11,8 @@ interface ISound {
   parameters: ISoundParameters;
 }
 
+const defaultHighestSoundNumber = 2;
+
 const DEFAULT_SOUNDS: { [id: string]: ISound } = {
   sound1: { title: "Sound 1", parameters: defaultParameters },
   sound2: { title: "Sound 2", parameters: defaultParameters },
@@ -19,6 +21,9 @@ const DEFAULT_SOUNDS: { [id: string]: ISound } = {
 function App() {
   const [sounds, setSounds] = useState<{ [id: string]: ISound }>(
     DEFAULT_SOUNDS
+  );
+  const [highestSoundNumber, setHighestSoundNumber] = useState(
+    defaultHighestSoundNumber
   );
 
   const onPlaySound = (id: string) => {
@@ -35,6 +40,16 @@ function App() {
       const { gain, type, frequency } = sound.parameters;
       play({ audioCtx, gain, frequency, type });
     });
+  };
+
+  const addSound = () => {
+    const soundNum = highestSoundNumber + 1;
+    const newSound = {
+      title: `Sound ${soundNum}`,
+      parameters: defaultParameters,
+    };
+    setHighestSoundNumber(soundNum);
+    setSounds({ ...sounds, ...{ [`sound${soundNum}`]: newSound } });
   };
 
   return (
@@ -68,6 +83,7 @@ function App() {
           </div>
         );
       })}
+      <button onClick={addSound}>+ Add a Sound</button>
 
       <div className="button-container flex-center">
         <button onClick={playAll}>Play All Together</button>
