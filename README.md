@@ -6,4 +6,4 @@ Acoustic experimentation with emergent sounds that result from the combination o
 
 ## Projects
 
-- [Using the Web Audio API](./react/)
+- [Using the Web Audio API](./WebAudio/)

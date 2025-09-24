@@ -8,7 +8,7 @@ Built with vite and React.
 
 ## Running
 
-- `cd react` (make sure you are in the react folder)
+- `cd WebAudio` (make sure you are in the project folder)
 - `npm install`
 - `npm run dev`
 
