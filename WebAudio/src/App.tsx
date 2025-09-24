@@ -55,17 +55,19 @@ function App() {
   return (
     <main className="main-container">
       <h1>Sound Emergence</h1>
-      <p>
-        Experiment by adjusting the parameters for each sound individually, then
-        click "Play Both" to hear them cancel each other out.
-      </p>
-      <ul>
-        <li>
-          Destructive Interference: Set the gain of sound 1 to "1" and the gain
-          of sound 2 to "-1" so they cancel each other out (you will hear
-          silence when playing both together)
-        </li>
-      </ul>
+      <article className="experiments-container">
+        <p>
+          Experiment by adjusting the parameters for each sound individually,
+          then click "Play Both" to hear them cancel each other out.
+        </p>
+        <ul>
+          <li>
+            Destructive Interference: Set the gain of sound 1 to "1" and the
+            gain of sound 2 to "-1" so they cancel each other out (you will hear
+            silence when playing both together)
+          </li>
+        </ul>
+      </article>
 
       {Object.keys(sounds).map((soundId) => {
         const sound = sounds[soundId];
