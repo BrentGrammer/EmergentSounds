@@ -43,9 +43,7 @@ export default function Sound({
 
       <SoundParameters id={soundId} updateSounds={updateSounds} />
 
-      <div className="button-container">
-        <button onClick={() => onPlaySound(soundId)}>Play {sound.title}</button>
-      </div>
+      <button onClick={() => onPlaySound(soundId)}>Play {sound.title}</button>
     </>
   );
 }

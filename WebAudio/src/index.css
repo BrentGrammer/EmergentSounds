@@ -2,6 +2,7 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  background-color: #f0f0f0;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -12,8 +13,10 @@
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 2rem;
 }
 
 h1 {
@@ -24,9 +27,5 @@ h1 {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
-  }
-  button {
-    background-color: #f9f9f9;
   }
 }

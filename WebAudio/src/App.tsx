@@ -11,6 +11,8 @@ import Sound from "./components/Sound/Sound";
 const AudioContext = window.AudioContext;
 const audioCtx = new AudioContext();
 
+const PLAY_ALL_TEXT = "Play All Together";
+
 const defaultHighestSoundNumber = 2;
 
 const DEFAULT_SOUNDS: { [id: string]: ISound } = {
@@ -67,36 +69,45 @@ function App() {
       <article className="experiments-container">
         <p>
           Experiment by adjusting the parameters for each sound individually,
-          then click "Play Both" to hear them cancel each other out.
+          then click "{PLAY_ALL_TEXT}" to hear them cancel each other out.
         </p>
         <ul>
           <li>
             Destructive Interference: Set the gain of sound 1 to "1" and the
             gain of sound 2 to "-1" so they cancel each other out (you will hear
-            silence when playing both together)
+            silence when playing the sounds together)
+          </li>
+          <li>
+            Adjust the Frequency of one sound slightly higher or lower than the
+            other to hear the pulsing result.
           </li>
         </ul>
       </article>
 
-      {Object.keys(sounds).map((soundId) => {
-        const sound = sounds[soundId];
+      <section className="sounds-container">
+        {Object.keys(sounds).map((soundId) => {
+          const sound = sounds[soundId];
 
-        return (
-          <div key={`playsound-${soundId}`}>
-            <Sound
-              sound={sound}
-              soundId={soundId}
-              removeSound={removeSound}
-              updateSounds={updateSounds}
-              onPlaySound={onPlaySound}
-            />
-          </div>
-        );
-      })}
-      <button onClick={addSound}>+ Add a Sound</button>
+          return (
+            <div key={`playsound-${soundId}`}>
+              <Sound
+                sound={sound}
+                soundId={soundId}
+                removeSound={removeSound}
+                updateSounds={updateSounds}
+                onPlaySound={onPlaySound}
+              />
+            </div>
+          );
+        })}
+      </section>
 
-      <div className="button-container flex-center">
-        <button onClick={playAll}>Play All Together</button>
+      <div className="flex-center">
+        <button onClick={addSound}>+ Add a Sound</button>
+      </div>
+
+      <div className="flex-center">
+        <button onClick={playAll}>{PLAY_ALL_TEXT}</button>
       </div>
     </main>
   );
