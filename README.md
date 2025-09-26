@@ -11,3 +11,7 @@ Acoustic experimentation with emergent sounds that result from the combination o
 ## Projects
 
 - [Using the Web Audio API](./WebAudio/)
+
+<br>
+<img src="./img/screenshot.png" />
+<br>
