@@ -8,6 +8,7 @@ interface Props {
   removeSound: (soundId: string, soundNumber: number) => void;
   updateSounds: (soundId: string, newParams: ISoundParameters) => void;
   onPlaySound: (soundId: string) => void;
+  toggleMuted: (soundId: string) => void;
 }
 
 function parseSoundNumber(id: string): number {
@@ -26,19 +27,37 @@ export default function Sound({
   removeSound,
   updateSounds,
   onPlaySound,
+  toggleMuted,
 }: Props) {
+
+  const shouldIncludePlayback = sound.parameters.muted === false;
+
   return (
     <>
       <div className="sound-title-container">
-        <h2>{sound.title}</h2>
+        <div className="sound-title-container-left">
+          <h2 style={{ margin: 0, padding: 0 }}>{sound.title}</h2>
 
-        <button
+          <input
+            id={`playselect-${soundId}`}
+            className="muted-checkbox"
+            type="checkbox"
+            checked={shouldIncludePlayback}
+            onChange={() => toggleMuted(soundId)}
+            title={
+              shouldIncludePlayback
+                ? "Deselect for Playback"
+                : "Select for Playback"
+            }
+          />
+        </div>
+
+        <FaTimes
+          size={30}
           onClick={() => removeSound(soundId, parseSoundNumber(soundId))}
           className="icon-delete-button"
           title={`Remove ${sound.title}`}
-        >
-          <FaTimes size={30} />
-        </button>
+        />
       </div>
 
       <SoundParameters id={soundId} updateSounds={updateSounds} />

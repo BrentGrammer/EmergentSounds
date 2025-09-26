@@ -43,6 +43,7 @@ export interface ISoundParameters {
   type: OscillatorType;
   frequency: number;
   durationSeconds: number;
+  muted: boolean;
 }
 
 export const defaultParameters: ISoundParameters = {
@@ -50,6 +51,7 @@ export const defaultParameters: ISoundParameters = {
   gain: 1,
   type: "sine",
   durationSeconds: 2,
+  muted: false
 };
 
 export interface ISound {

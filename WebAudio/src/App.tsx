@@ -37,10 +37,12 @@ function App() {
   };
 
   const playAll = () => {
-    Object.values(sounds).forEach((sound) => {
-      const { gain, type, frequency, durationSeconds } = sound.parameters;
-      play({ audioCtx, gain, frequency, type, durationSeconds });
-    });
+    Object.values(sounds)
+      .filter((sound) => !sound.parameters.muted)
+      .forEach((sound) => {
+        const { gain, type, frequency, durationSeconds } = sound.parameters;
+        play({ audioCtx, gain, frequency, type, durationSeconds });
+      });
   };
 
   const addSound = () => {
@@ -60,6 +62,13 @@ function App() {
     if (soundNumber === highestSoundNumber) {
       setHighestSoundNumber(highestSoundNumber - 1);
     }
+  };
+
+  const toggleMuted = (id: string) => {
+    const sound = sounds[id];
+    const isMuted = sound.parameters.muted;
+    const params: ISoundParameters = { ...sound.parameters, muted: !isMuted };
+    setSounds({ ...sounds, [id]: { ...sound, parameters: params } });
   };
 
   return (
@@ -95,6 +104,7 @@ function App() {
                 removeSound={removeSound}
                 updateSounds={updateSounds}
                 onPlaySound={onPlaySound}
+                toggleMuted={toggleMuted}
               />
             </div>
           );

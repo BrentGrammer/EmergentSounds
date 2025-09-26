@@ -26,7 +26,22 @@ button:hover {
 
 .sound-title-container {
   display: flex;
-  align-items: end;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sound-title-container-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sound-title-container .muted-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
 }
 
 .experiments-container {
@@ -57,5 +72,5 @@ button:hover {
 }
 
 .parameter-label {
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
