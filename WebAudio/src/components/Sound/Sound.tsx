@@ -46,8 +46,8 @@ export default function Sound({
             onChange={() => toggleMuted(soundId)}
             title={
               shouldIncludePlayback
-                ? "Deselect for Playback"
-                : "Select for Playback"
+                ? "Deselect to mute"
+                : "Select to include in Playback"
             }
           />
         </div>
