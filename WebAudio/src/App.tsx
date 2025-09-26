@@ -73,7 +73,7 @@ function App() {
 
   return (
     <main className="main-container">
-      <h1>Sound Emergence</h1>
+      <h1>Emergent Sounds</h1>
       <article className="experiments-container">
         <p>
           Experiment by adjusting the parameters for each sound individually,
