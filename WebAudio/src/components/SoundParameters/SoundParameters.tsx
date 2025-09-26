@@ -42,7 +42,7 @@ export default function SoundParameters({ id, updateSounds }: Props) {
         }
       />
       <ParameterSlider
-        id={`gainSlider-${id}`}
+        id={`durationSlider-${id}`}
         title="Duration (Seconds):"
         range={[1, 10]}
         defaultValue={parameters.durationSeconds}
