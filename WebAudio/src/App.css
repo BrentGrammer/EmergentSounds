@@ -55,3 +55,7 @@ button:hover {
   justify-content: flex-start;
   gap: 3rem;
 }
+
+.parameter-label {
+  margin-right: .5rem;
+}

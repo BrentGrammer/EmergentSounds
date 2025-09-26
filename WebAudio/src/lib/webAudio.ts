@@ -18,13 +18,13 @@ export const play = ({
   gain,
   frequency,
   type,
-  lengthMs = 2000,
+  durationSeconds = 2,
 }: {
   audioCtx: AudioContext;
   gain: number;
   frequency: number;
   type: OscillatorType;
-  lengthMs?: number;
+  durationSeconds?: number;
 }) => {
   const osc = createOscillator({ audioCtx, frequency, type });
   const gainNode = audioCtx.createGain();
@@ -35,19 +35,21 @@ export const play = ({
 
   setTimeout(() => {
     osc.stop();
-  }, lengthMs);
+  }, durationSeconds * 1000);
 };
 
 export interface ISoundParameters {
   gain: number;
   type: OscillatorType;
   frequency: number;
+  durationSeconds: number;
 }
 
 export const defaultParameters: ISoundParameters = {
   frequency: 440,
   gain: 1,
   type: "sine",
+  durationSeconds: 2,
 };
 
 export interface ISound {

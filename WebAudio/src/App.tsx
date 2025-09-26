@@ -13,12 +13,11 @@ const audioCtx = new AudioContext();
 
 const PLAY_ALL_TEXT = "Play All Together";
 
-const defaultHighestSoundNumber = 2;
-
 const DEFAULT_SOUNDS: { [id: string]: ISound } = {
   sound1: { title: "Sound 1", parameters: defaultParameters },
   sound2: { title: "Sound 2", parameters: defaultParameters },
 };
+const defaultHighestSoundNumber = Object.keys(DEFAULT_SOUNDS).length;
 
 function App() {
   const [sounds, setSounds] = useState<{ [id: string]: ISound }>(
@@ -29,8 +28,8 @@ function App() {
   );
 
   const onPlaySound = (id: string) => {
-    const { gain, type, frequency } = sounds[id].parameters;
-    play({ audioCtx, gain, type, frequency });
+    const { gain, type, frequency, durationSeconds } = sounds[id].parameters;
+    play({ audioCtx, gain, type, frequency, durationSeconds });
   };
 
   const updateSounds = (id: string, parameters: ISoundParameters) => {
@@ -39,8 +38,8 @@ function App() {
 
   const playAll = () => {
     Object.values(sounds).forEach((sound) => {
-      const { gain, type, frequency } = sound.parameters;
-      play({ audioCtx, gain, frequency, type });
+      const { gain, type, frequency, durationSeconds } = sound.parameters;
+      play({ audioCtx, gain, frequency, type, durationSeconds });
     });
   };
 

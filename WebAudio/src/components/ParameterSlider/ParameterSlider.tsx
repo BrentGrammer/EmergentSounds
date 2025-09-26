@@ -65,7 +65,7 @@ export default function ParameterSlider({
 
   return (
     <div className="control-group">
-      <label htmlFor={id}>{title}</label>
+      <label className="parameter-label" htmlFor={id}>{title}</label>
       <input
         type="range"
         id={id}

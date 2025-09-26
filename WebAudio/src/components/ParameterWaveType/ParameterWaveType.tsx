@@ -19,7 +19,7 @@ export default function ParameterWaveType({
 
   return (
     <div className="control-group">
-      <label htmlFor={id}>Wave Type:</label>
+      <label className="parameter-label" htmlFor={id}>Wave Type:</label>
       <select id={id} onChange={onChange} value={selected}>
         <option value="sine">Sine</option>
         <option value="square">Square</option>

@@ -1,13 +1,7 @@
 import { useState } from "react";
 import ParameterSlider from "../ParameterSlider/ParameterSlider";
 import ParameterWaveType from "../ParameterWaveType/ParameterWaveType";
-import type { ISoundParameters } from "../../lib/webAudio";
-
-const defaultSoundSetting: ISoundParameters = {
-  gain: 1.0,
-  type: "sine",
-  frequency: 440,
-};
+import { defaultParameters, type ISoundParameters } from "../../lib/webAudio";
 
 interface Props {
   id: string;
@@ -16,7 +10,7 @@ interface Props {
 
 export default function SoundParameters({ id, updateSounds }: Props) {
   const [parameters, setParameters] =
-    useState<ISoundParameters>(defaultSoundSetting);
+    useState<ISoundParameters>(defaultParameters);
 
   const onSoundParameterChange = (newParams: Partial<ISoundParameters>) => {
     const updatedParams = { ...parameters, ...newParams };
@@ -30,7 +24,7 @@ export default function SoundParameters({ id, updateSounds }: Props) {
         id={`frequencySlider-${id}`}
         title="Frequency(Hz):"
         range={[50, 1000]}
-        defaultValue={defaultSoundSetting.frequency}
+        defaultValue={parameters.frequency}
         onSoundParameterChange={(newSetting: unknown) =>
           onSoundParameterChange({
             frequency: newSetting as number,
@@ -41,10 +35,20 @@ export default function SoundParameters({ id, updateSounds }: Props) {
         id={`gainSlider-${id}`}
         title="Gain (Phase):"
         range={[-2, 2]}
-        defaultValue={defaultSoundSetting.gain}
+        defaultValue={parameters.gain}
         step="0.1"
         onSoundParameterChange={(newSetting: unknown) =>
           onSoundParameterChange({ gain: newSetting as number })
+        }
+      />
+      <ParameterSlider
+        id={`gainSlider-${id}`}
+        title="Duration (Seconds):"
+        range={[1, 10]}
+        defaultValue={parameters.durationSeconds}
+        step="1"
+        onSoundParameterChange={(newSetting: unknown) =>
+          onSoundParameterChange({ durationSeconds: newSetting as number })
         }
       />
       <ParameterWaveType
